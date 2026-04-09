@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.csv
+*.md
+!README.md
+venv/
+env/
+.venv/
