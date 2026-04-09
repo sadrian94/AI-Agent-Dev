@@ -1,5 +1,6 @@
 import sys
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 from rich.console import Console
 from rich.panel import Panel
@@ -38,6 +39,19 @@ def main():
             task_zenith = progress.add_task(description="[magenta]Zenith: Conducting Grand Strategy Macro Research...", total=None)
             macro_report = zenith.generate_macro_report(ticker)
             progress.update(task_zenith, completed=100)
+            
+            # Step 2.5: Save to Obsidian Data Lake
+            task_obsidian = progress.add_task(description="[green]Saving Research to Obsidian Data Lake...", total=None)
+            current_date = datetime.now().strftime("%Y-%m-%d")
+            obsidian_dir = os.path.join(os.path.dirname(__file__), 'data_lake', 'obsidian_sync')
+            os.makedirs(obsidian_dir, exist_ok=True)
+            
+            file_name = f"{ticker}_{current_date}_research.md"
+            file_path = os.path.join(obsidian_dir, file_name)
+            
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(macro_report)
+            progress.update(task_obsidian, completed=100)
             
             # Step 3: Sigma Technical Analysis Gathering
             task_tech = progress.add_task(description="[blue]Sigma: Fetching Technical Data and computing indicators (SMA, ATR, RSI)...", total=None)

@@ -86,7 +86,7 @@ Deliver your output with military precision. Provide:
         system_prompt = self.get_system_prompt(ticker)
         
         user_prompt = f"""
---- ZENITH'S MACRO REPORT ON {ticker} ---
+--- ZENITH'S OBSIDIAN MACRO REPORT ON {ticker} ---
 {macro_report}
 
 --- SIGMA'S TECHNICAL DATA SUMMARY ON {ticker} ---
